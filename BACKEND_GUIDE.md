@@ -1,8 +1,8 @@
-# Backend Architecture & API Documentation
+﻿# Backend Architecture & API Documentation
 
 ## Overview
 
-The Grand Mafia Bot backend consists of:
+UnderbossHQ backend consists of:
 
 1. **Express.js Server** - REST API and web dashboard
 2. **Discord.js Bot** - Discord bot client
@@ -414,7 +414,7 @@ PUT /api/dashboard/settings
 **Body:**
 ```json
 {
-  "server_name": "Grand Mafia",
+  "server_name": "UnderbossHQ",
   "bot_prefix": "!",
   "enable_auto_moderation": true
 }

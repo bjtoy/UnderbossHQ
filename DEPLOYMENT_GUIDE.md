@@ -1,4 +1,4 @@
-# The Grand Mafia Bot & Dashboard Deployment Guide
+﻿# UnderbossHQ & Dashboard Deployment Guide
 
 ## Backend Setup
 1. Copy `.env.example` to `.env`

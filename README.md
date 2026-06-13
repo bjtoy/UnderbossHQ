@@ -1,6 +1,6 @@
-# TGM Discord Server Management
+# UnderbossHQ — Discord Server Management
 
-Parent repository for the **UnderbossHQ** control panel — Discord OAuth dashboard, Express API, and (future) bot integration for The Grand Mafia server management.
+Parent repository for the **UnderbossHQ** control panel — Discord OAuth dashboard, Express API, and bot integration for Discord server management.
 
 This repo holds **planning docs**, **docker-compose**, and workspace config. Application code lives in separate repositories (cloned into `backend/` and `dashboard/` locally).
 
@@ -91,8 +91,27 @@ See [render.yaml](./render.yaml) for a Render blueprint. Production checklist:
 2. Backend `startCommand`: `npx prisma migrate deploy && npm start`
 3. Dashboard build env: `VITE_API_URL=https://<backend-host>`
 4. Discord OAuth redirect: `https://<backend-host>/api/auth/callback`
-5. Backend `DISCORD_TOKEN` for live kick/ban and guild stats
+5. Backend `DISCORD_TOKEN` for live kick/ban, guild stats, and the bot worker
 6. Dashboard static site: SPA fallback via `dashboard/public/_redirects`
+
+### Discord bot worker
+
+The bot starts automatically with the backend when `DISCORD_TOKEN` is set. It handles:
+
+- Slash commands (`/ping`, `/kick`, `/ban`, `/warn`, etc.)
+- Role sync on join, leave, and role changes
+- Startup full sync when `DISCORD_GUILD_ID` is set
+
+Register slash commands once after deploy:
+
+```bash
+cd backend
+npm run deploy-commands
+```
+
+Use `DISCORD_GUILD_ID` in `.env` for fast guild-scoped command registration during development.
+
+Enable the optional translate button handler with `BOT_ENABLE_TRANSLATE=true` (off by default).
 
 ### Docker (optional)
 

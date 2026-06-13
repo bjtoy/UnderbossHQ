@@ -1,4 +1,4 @@
-# Grand Mafia Bot - Game Guides Feature
+﻿# UnderbossHQ - Game Guides Feature
 
 ## Overview
 
@@ -237,7 +237,7 @@ Guides are automatically formatted as Discord embeds with:
 - Description (your guide content)
 - Author (moderator who created it)
 - Timestamp (when it was posted)
-- Footer (Grand Mafia branding)
+- Footer (UnderbossHQ branding)
 
 ## Permissions
 
@@ -412,5 +412,5 @@ For issues with the guides feature:
 
 ---
 
-**Grand Mafia Bot - Game Guides v1.0**
+**UnderbossHQ - Game Guides v1.0**
 Centralize your faction knowledge with organized, searchable guides!

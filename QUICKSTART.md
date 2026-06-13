@@ -1,4 +1,4 @@
-# Grand Mafia Bot - Quick Start Guide
+﻿# UnderbossHQ - Quick Start Guide
 
 Get your Discord bot running in **5 minutes**.
 
@@ -11,7 +11,7 @@ Get your Discord bot running in **5 minutes**.
 ## Step 1: Get Your Discord Bot Token
 
 1. Go to [Discord Developer Portal](https://discord.com/developers/applications)
-2. Click "New Application" and name it "Grand Mafia Bot"
+2. Click "New Application" and name it "UnderbossHQ"
 3. Go to "Bot" section and click "Add Bot"
 4. Under "TOKEN", click "Copy"
 5. **Save this token safely** - you'll need it in Step 3
@@ -62,7 +62,7 @@ npm start
 You should see:
 ```
 ✅ Bot logged in as YourBotName#0000
-🎮 Grand Mafia Bot is ready to serve!
+🎮 UnderbossHQ is ready to serve!
 ```
 
 ## Step 4: Test Your Bot
@@ -147,6 +147,6 @@ node --version
 
 ---
 
-**You're all set!** Your Grand Mafia Bot is now running. 🎮⚔️
+**You're all set!** Your UnderbossHQ is now running. 🎮⚔️
 
 For more details, see [README.md](README.md)

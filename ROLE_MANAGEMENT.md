@@ -1,4 +1,4 @@
-# Grand Mafia Bot - Role Management System
+﻿# UnderbossHQ - Role Management System
 
 ## Overview
 
@@ -560,4 +560,4 @@ This makes managing your faction server **much easier** without complex Discord 
 
 ---
 
-**Grand Mafia Bot - Role Management v1.0**
+**UnderbossHQ - Role Management v1.0**

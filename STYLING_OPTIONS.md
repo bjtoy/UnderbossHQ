@@ -1,4 +1,4 @@
-# Grand Mafia Bot - Guide Styling Options
+﻿# UnderbossHQ - Guide Styling Options
 
 This document explains the three different styling methods available for creating game guides.
 
@@ -156,7 +156,7 @@ Generates professional-looking guide images with custom colors, backgrounds, and
 │  • Tactics                          │
 │  • Counters                         │
 │                                     │
-│  Grand Mafia - Game Guide           │
+│  UnderbossHQ - Game Guide           │
 │                                     │
 └─────────────────────────────────────┘
 ```
@@ -451,4 +451,4 @@ All three methods are fully supported and can be used together for maximum flexi
 
 ---
 
-**Grand Mafia Bot - Styling Options v1.0**
+**UnderbossHQ - Styling Options v1.0**

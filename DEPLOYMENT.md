@@ -1,6 +1,6 @@
-# Grand Mafia Bot - Deployment Guide
+﻿# UnderbossHQ - Deployment Guide
 
-This guide covers deploying the Grand Mafia Bot to various cloud platforms for 24/7 uptime.
+This guide covers deploying the UnderbossHQ to various cloud platforms for 24/7 uptime.
 
 ## Table of Contents
 

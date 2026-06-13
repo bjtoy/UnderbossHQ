@@ -1,8 +1,8 @@
-# Grand Mafia Bot - Project Summary
+﻿# UnderbossHQ - Project Summary
 
 ## Overview
 
-**Grand Mafia Bot** is a comprehensive Discord bot designed specifically for **The Grand Mafia** faction server. It streamlines server management, provides real-time translation, enables moderator announcements, and includes a web-based control panel for easy administration.
+**UnderbossHQ** is a comprehensive Discord bot designed specifically for **UnderbossHQ** faction server. It streamlines server management, provides real-time translation, enables moderator announcements, and includes a web-based control panel for easy administration.
 
 ## What You're Getting
 
@@ -266,7 +266,7 @@ You now have a **complete, production-ready Discord bot** with:
 - Comprehensive documentation
 - Multiple deployment options
 
-The bot is ready to deploy to cloud hosting and manage your Grand Mafia faction server efficiently. No more complex setups or time-consuming coordination methods—everything is streamlined and easy to use.
+The bot is ready to deploy to cloud hosting and manage your UnderbossHQ faction server efficiently. No more complex setups or time-consuming coordination methods—everything is streamlined and easy to use.
 
 **Total Development Time Saved**: Hours of manual setup and configuration  
 **Ready to Deploy**: Yes, immediately  
@@ -275,4 +275,4 @@ The bot is ready to deploy to cloud hosting and manage your Grand Mafia faction 
 
 ---
 
-**Grand Mafia Bot v1.0.0** - Faction Server Management Made Easy ⚔️
+**UnderbossHQ v1.0.0** - Faction Server Management Made Easy ⚔️
