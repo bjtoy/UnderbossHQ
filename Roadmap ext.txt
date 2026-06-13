@@ -49,19 +49,20 @@ F — FRONTEND AUTH FLOW UPDATE
     ✔ Role-based landing routes
 
 G — BOT INTEGRATION
-    ✔ Kick/ban via Discord REST from dashboard
-    ☐ guildMemberUpdate → sync roles
-    ☐ guildMemberAdd → create member
-    ☐ guildMemberRemove → mark inactive
-    ☐ Startup full sync
-    ☐ Slash commands (bot worker)
-    ☐ reload-config / sync-roles admin actions
+    ✔ Bot worker starts with backend API
+    ✔ Slash commands loaded (/kick, /ban, /warn, /ping, etc.)
+    ✔ guildMemberUpdate → sync roles
+    ✔ guildMemberAdd → create member profile
+    ✔ guildMemberRemove → log leave
+    ✔ Startup full sync (DISCORD_GUILD_ID)
+    ✔ Admin sync-roles from dashboard
+    ☐ reload-config (env-based only)
 
 H — DASHBOARD UI ENHANCEMENTS
-    ☐ Guide editor UI
-    ☐ Announcement manager
+    ✔ Guide editor UI
+    ✔ Announcement manager
     ✔ Moderation logs viewer (admin live logs)
-    ☐ Settings panel
+    ✔ Settings panel
     ☐ User management
     ☐ Navigation polish
 
@@ -88,7 +89,7 @@ K — PRODUCTION HARDENING
     ✔ SPA redirects for Render
     ✔ render.yaml blueprint
     ✔ Auth debug disabled in production
-    ☐ Rate limiting
+    ✔ Rate limiting
     ☐ Error logging service
     ☐ Render/Vercel env verification
 
