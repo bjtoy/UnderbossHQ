@@ -85,6 +85,15 @@ Add these in the [Discord Developer Portal](https://discord.com/developers/appli
 
 Production: set `FRONTEND_URL=https://tgm-dashboard.onrender.com` on the backend and `VITE_API_URL` to your backend URL on the dashboard build.
 
+See [render.yaml](./render.yaml) for a Render blueprint. Production checklist:
+
+1. Backend `NODE_ENV=production` (required for cross-origin cookies)
+2. Backend `startCommand`: `npx prisma migrate deploy && npm start`
+3. Dashboard build env: `VITE_API_URL=https://<backend-host>`
+4. Discord OAuth redirect: `https://<backend-host>/api/auth/callback`
+5. Backend `DISCORD_TOKEN` for live kick/ban and guild stats
+6. Dashboard static site: SPA fallback via `dashboard/public/_redirects`
+
 ### Docker (optional)
 
 From this directory:

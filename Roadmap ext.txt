@@ -49,12 +49,13 @@ F — FRONTEND AUTH FLOW UPDATE
     ✔ Role-based landing routes
 
 G — BOT INTEGRATION
+    ✔ Kick/ban via Discord REST from dashboard
     ☐ guildMemberUpdate → sync roles
     ☐ guildMemberAdd → create member
     ☐ guildMemberRemove → mark inactive
     ☐ Startup full sync
-    ☐ Moderation actions (mute/warn/delete)
-    ☐ Slash commands
+    ☐ Slash commands (bot worker)
+    ☐ reload-config / sync-roles admin actions
 
 H — DASHBOARD UI ENHANCEMENTS
     ☐ Guide editor UI
@@ -82,13 +83,14 @@ J — MONETIZATION SYSTEM
     ☐ Merch store
 
 K — PRODUCTION HARDENING
-    ☐ CORS rules
-    ☐ HTTPS enforcement
-    ☐ Secure cookies
+    ✔ Postgres session store
+    ✔ Prisma migrate on deploy
+    ✔ SPA redirects for Render
+    ✔ render.yaml blueprint
+    ✔ Auth debug disabled in production
     ☐ Rate limiting
-    ☐ Error logging
-    ☐ Production .env
-    ☐ Render/Vercel config
+    ☐ Error logging service
+    ☐ Render/Vercel env verification
 
 L — DEPLOYMENT
     ☐ Backend deployment

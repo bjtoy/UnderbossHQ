@@ -1,0 +1,33 @@
+# Render Blueprint — https://render.com/docs/blueprint-spec
+#
+# Set secrets in the Render dashboard (not in this file):
+#   Backend: DISCORD_CLIENT_ID, DISCORD_CLIENT_SECRET, DISCORD_TOKEN,
+#            SESSION_SECRET, DATABASE_URL, ADMIN_DISCORD_IDS
+#   Dashboard build: VITE_API_URL = https://<your-backend>.onrender.com
+
+services:
+  - type: web
+    name: tgm-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install && npx prisma generate
+    startCommand: npx prisma migrate deploy && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: FRONTEND_URL
+        value: https://tgm-dashboard.onrender.com
+      - key: DISCORD_CALLBACK_URL
+        value: https://tgm-backend.onrender.com/api/auth/callback
+      - key: PORT
+        value: 3000
+
+  - type: web
+    name: tgm-dashboard
+    runtime: static
+    rootDir: dashboard
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://tgm-backend.onrender.com
