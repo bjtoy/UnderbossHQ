@@ -71,7 +71,7 @@ I — OPTIONAL FEATURES
     ✔ Faction analytics
     ✔ Event scheduling
     ✔ Advanced moderation
-    ☐ Webhooks
+    ✔ Webhooks
     ☐ AI tools
 
 J — MONETIZATION SYSTEM
