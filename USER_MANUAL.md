@@ -4,6 +4,11 @@ Welcome to **UnderbossHQ**, the Discord control panel for your faction server. U
 
 **Dashboard:** [https://underbosshq-two.vercel.app](https://underbosshq-two.vercel.app)
 
+**Download:** [UnderbossHQ-User-Manual.docx](./UnderbossHQ-User-Manual.docx)  
+**In the app:** open **Help** in the sidebar (`/help`) for the same guide online.
+
+To rebuild the Word file after editing this markdown: `cd dashboard && npm run build:manual`
+
 ---
 
 ## 1. What UnderbossHQ does
@@ -271,6 +276,8 @@ Exact commands depend on what is registered for your bot. Prefer the dashboard f
 
 - [Terms of Service](/terms) (in the dashboard)  
 - [Privacy Policy](/privacy) (in the dashboard)  
+- **Help** — in-app guide at `/help`  
+- **Download User Manual** — Word file from the login page, Help page, or [UnderbossHQ-User-Manual.docx](./UnderbossHQ-User-Manual.docx)
 
 For deployment and developer setup, see `QUICKSTART.md`, `DEPLOYMENT_GUIDE.md`, and `LAUNCH_CHECKLIST.md` in this repository.
 

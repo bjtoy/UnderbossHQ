@@ -2,7 +2,7 @@
 
 Parent repository for the **UnderbossHQ** platform — Discord OAuth dashboard, Express API, and bot integration.
 
-**New here?** Read the [User Manual](./USER_MANUAL.md) for login, roles, and day-to-day dashboard use.
+**New here?** Read the [User Manual](./USER_MANUAL.md) or download [UnderbossHQ-User-Manual.docx](./UnderbossHQ-User-Manual.docx) for login, roles, and day-to-day dashboard use.
 
 This repo holds **planning docs**, **docker-compose**, and workspace config. Application code lives in separate repositories (cloned into `backend/` and `dashboard/` locally).
 
