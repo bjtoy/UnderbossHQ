@@ -4,6 +4,8 @@ Parent repository for the **UnderbossHQ** platform — Discord OAuth dashboard, 
 
 **New here?** Read the [User Manual](./USER_MANUAL.md) or download [UnderbossHQ-User-Manual.docx](./UnderbossHQ-User-Manual.docx) for login, roles, and day-to-day dashboard use.
 
+**Planning:** [ROADMAP.md](./ROADMAP.md) is the single source of truth for complete vs remaining work.
+
 This repo holds **planning docs**, **docker-compose**, and workspace config. Application code lives in separate repositories (cloned into `backend/` and `dashboard/` locally).
 
 ## Repositories
@@ -154,4 +156,4 @@ Never commit `.env` files. They are gitignored in all repos.
 
 ## Roadmap status
 
-See [Roadmap ext.txt](./Roadmap%20ext.txt) for section-by-section progress (auth, roles, bot integration, deployment).
+See [ROADMAP.md](./ROADMAP.md) for complete vs remaining work.
