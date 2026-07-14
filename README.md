@@ -2,6 +2,8 @@
 
 Parent repository for the **UnderbossHQ** platform — Discord OAuth dashboard, Express API, and bot integration.
 
+**New here?** Read the [User Manual](./USER_MANUAL.md) for login, roles, and day-to-day dashboard use.
+
 This repo holds **planning docs**, **docker-compose**, and workspace config. Application code lives in separate repositories (cloned into `backend/` and `dashboard/` locally).
 
 ## Repositories
@@ -134,6 +136,7 @@ Ensure `backend/.env` exists before running compose.
 ```
 UnderbossHQ/                  ← parent repo (open this folder in Cursor)
 ├── README.md
+├── USER_MANUAL.md            ← end-user guide (members, mods, admins)
 ├── LAUNCH_CHECKLIST.md       ← Section L deploy checklist
 ├── DEPLOYMENT_GUIDE.md
 ├── docker-compose.yml

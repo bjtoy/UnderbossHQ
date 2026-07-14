@@ -1,4 +1,4 @@
-﻿# UnderbossHQ - Role Management System
+# UnderbossHQ - Role Management System
 
 ## Overview
 

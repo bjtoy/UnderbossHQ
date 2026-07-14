@@ -1,4 +1,4 @@
-﻿# UnderbossHQ Deployment Guide
+# UnderbossHQ Deployment Guide
 
 Primary platform: **Render** (see [render.yaml](./render.yaml)).
 
