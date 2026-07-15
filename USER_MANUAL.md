@@ -91,7 +91,8 @@ If you expect staff tools but only see Member links, confirm your Discord roles 
 
 - **Change Server** — pick a different Discord server  
 - **Log out** — end your session  
-- **Translator** — floating button (🌐) for quick text translation (when premium/access allows)
+- **Translator** — floating button (🌐) for quick text translation (when premium/access allows)  
+- **Help** — this guide at `/help` (also available before picking a server, and behind the premium paywall)
 
 ---
 
@@ -253,7 +254,7 @@ Exact commands depend on what is registered for your bot. Prefer the dashboard f
 | Stuck on login | Hard-refresh; confirm Discord OAuth redirect matches the API URL |
 | Wrong server tools | Use **Change Server** and re-select |
 | Missing Mod/Admin menu | Check Discord permissions; ask an admin to **Sync Roles** |
-| Premium required screen | Subscribe (owner/admin) or request complimentary access |
+| Premium required screen | Subscribe (owner/admin) or request complimentary access — **Help** stays available |
 | Guide won’t post | Save first; pick a Discord channel; confirm bot can post there |
 | Mobile menu hard to use | Use the ☰ button; close by tapping outside the drawer |
 | Translator not loading | Confirm you have dashboard access; try again in a few seconds |
