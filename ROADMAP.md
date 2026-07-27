@@ -2,6 +2,8 @@
 
 **Single source of truth** for planning. Deploy/smoke checks: [LAUNCH_CHECKLIST.md](./LAUNCH_CHECKLIST.md). User docs: [USER_MANUAL.md](./USER_MANUAL.md).
 
+**Last audit:** 28 July 2026 — full review of `L:\UnderbossHQ` (parent, `backend/`, `dashboard/`).
+
 ---
 
 ## Direction
@@ -11,11 +13,53 @@ UnderbossHQ is a **live faction ops platform**: Discord OAuth dashboard + Expres
 | Phase | Goal | Status |
 |-------|------|--------|
 | **1. Core platform** | Auth, roles, guides, announcements, mod/admin tools, bot, deploy | **Done** |
-| **2. Product polish** | Ship pending UI (Help, mobile nav), fix remaining bot/UX gaps, finish Stripe end-to-end | **Now** |
-| **3. Growth / monetization** | Premium bot tier, faction billing, marketplace, merch | **Next** |
+| **2. Product polish & billing** | Public site, Revolut paywall, subscription UX, merchant verification | **Now** |
+| **3. Growth / monetization** | Multi-tier checkout, individual plans, marketplace, merch | **Next** |
 | **4. Scale** | Multi-guild operator views, deeper analytics, paid API | **Later** |
 
 **Work the “Not complete” list in Phase 2 order before opening large Phase 3 features.**
+
+---
+
+## Audit summary (28 Jul 2026)
+
+### Build & runtime
+
+| Check | Result |
+|-------|--------|
+| Dashboard `npm run build` | **Pass** |
+| Backend `npm run verify-env` | **Pass** (Stripe optional warning expected) |
+| Backend syntax (`index.js`, `server.js`) | **Pass** |
+| Dashboard ESLint | **33 issues** (mostly strict React 19 rules — non-blocking; build unaffected) |
+
+### Working as intended
+
+- Discord OAuth, guild select, role-based dashboards
+- Guides, announcements, moderation, admin tools, bot slash commands
+- **Public pages** (Home, Pricing, Contact, Help, Demo, Terms, Privacy) — no login required
+- **Revolut billing code path** (checkout redirect, webhook handler, premium grant)
+- **Subscription prompts** for logged-in free users (sidebar, `/premium`, banners)
+- **Customer currency display** on pricing and checkout buttons (approximate FX; charged in AUD)
+- Premium bot command gating, complimentary access, operator admin tools
+- Static HTML preview in `index.html` for crawlers (Revolut / merchant verification)
+
+### Issues found
+
+| Severity | Issue | Action |
+|----------|--------|--------|
+| **Critical** | `getCheckoutPricing()` not on default Revolut export — broke `billingCheckout` on `/api/auth/me` | **Fixed locally** — commit + deploy backend |
+| **Critical** | Revolut **production env vars** may be unset on Render → `billingConfigured: false`, no checkout | Set on Render API service (see below) |
+| **Critical** | `stripe_backup_code.txt` in parent folder (untracked) | **Do not commit** — added to `.gitignore`; delete or move to secure storage |
+| **High** | Revolut merchant verification still pending | Custom domain optional; ensure live site + product description visible to crawlers |
+| **High** | **Single checkout price** (`REVOLUT_PREMIUM_AMOUNT`) vs **multiple tiers** on pricing page | Align env amount with default server plan OR implement per-plan checkout |
+| **High** | **Individual plans** — display only; no automated checkout (email support) | Phase 3 or manual process for now |
+| **Medium** | Guide **banner PNGs missing** (`public/banners/*.png`) — build warns; Discord/guide previews fall back | Add banner assets per `public/banners/README.md` |
+| **Medium** | `@revolut/checkout` in parent `package.json` unused — app uses hosted checkout URL redirect | Remove orphan dep or implement embedded widget later |
+| **Medium** | Parent repo tracks `backend/` + `dashboard/` as nested repos; pointer commits may lag | Update parent after subrepo pushes |
+| **Medium** | LAUNCH_CHECKLIST still Stripe-centric | Update checklist with Revolut env + webhook steps |
+| **Low** | ESLint warnings (setState-in-effect, unused imports) | Clean up incrementally |
+| **Low** | FX rates in `customerCurrency.js` are static approximations | Optional live rates API later |
+| **Low** | Free Render DB/service spin-down | Upgrade plan or accept cold-start delays |
 
 ---
 
@@ -71,7 +115,9 @@ UnderbossHQ is a **live faction ops platform**: Discord OAuth dashboard + Expres
 - [x] Settings + user management
 - [x] Brand fonts, login styling, grouped sidebar + page headers
 - [x] Floating translator widget
-- [x] Collapsible mobile nav (code on `cursor/mobile-friendly-nav` — **ship to dashboard `main` / Vercel still pending**)
+- [x] Collapsible mobile nav
+- [x] **Public site shell** — unified branding, gold links, richer layout
+- [x] **Help page** + public help overview
 
 ### I — Optional features (built)
 
@@ -80,12 +126,16 @@ UnderbossHQ is a **live faction ops platform**: Discord OAuth dashboard + Expres
 - [x] Event scheduling (basic)
 - [x] Advanced moderation (bot + dashboard hooks)
 - [x] Webhooks (as implemented)
-- [x] AI tooling (backend exists; **UI removed** — credits/gating out of active product surface)
+- [x] AI tooling (backend exists; UI removed from active surface)
 
 ### J — Monetization (partial)
 
 - [x] Premium membership gates + complimentary access grants
-- [x] Stripe Checkout + Customer Portal (wired; confirm env + webhooks on Render)
+- [x] Stripe Checkout + Customer Portal (legacy; `BILLING_PROVIDER=stripe`)
+- [x] **Revolut Merchant checkout** (default paywall)
+- [x] **In-app subscription prompts** for non-premium users
+- [x] **Local currency price display** (checkout settles in AUD)
+- [x] Premium vs basic bot command split
 
 ### K — Production hardening
 
@@ -99,7 +149,7 @@ UnderbossHQ is a **live faction ops platform**: Discord OAuth dashboard + Expres
 - [x] Backend + bot on Render (`underbosshq-api-hp8b.onrender.com`)
 - [x] Dashboard on Vercel (`underbosshq-two.vercel.app`)
 - [x] Production Postgres, SSL, launch checklist, health monitor script
-- [x] Parent repo docs + user manual (`USER_MANUAL.md` / Word download)
+- [x] Parent repo docs + user manual
 
 ---
 
@@ -109,24 +159,33 @@ UnderbossHQ is a **live faction ops platform**: Discord OAuth dashboard + Expres
 
 | Priority | Item | Notes |
 |----------|------|--------|
-| P0 | Merge dashboard **mobile nav + Help** to `main` and deploy Vercel | Local Help page / manual assets may still be uncommitted on feature branch |
-| P0 | Confirm **Stripe** live end-to-end | Env secrets, webhook URL, test subscribe + portal cancel |
-| P1 | Finish **launch checklist** checkboxes | [LAUNCH_CHECKLIST.md](./LAUNCH_CHECKLIST.md) still has open verify items |
-| P1 | Bot UX polish | Prefer User/Channel selectors where useful; clear `/announce quick\|post\|list` usage |
-| P1 | Multi-guild operator view | Dashboard list of guilds the bot is in |
-| P2 | Custom domains (optional) | Beyond default Render/Vercel hosts |
-| P2 | Post-launch alerting | Render/email/Slack on failed health checks |
+| **P0** | **Deploy backend billing fix** | `getCheckoutPricing` export fix — commit + push `UnderbossHQ-backend` |
+| **P0** | **Revolut live on Render** | `BILLING_PROVIDER=revolut`, `REVOLUT_MERCHANT_SECRET_KEY`, `REVOLUT_PREMIUM_AMOUNT` (minor units, e.g. `1400` = A$14), `REVOLUT_PREMIUM_CURRENCY=AUD`, `REVOLUT_WEBHOOK_SIGNING_SECRET`, `DASHBOARD_REQUIRES_PREMIUM=true` |
+| **P0** | **Revolut webhook** | `POST https://underbosshq-api-hp8b.onrender.com/api/revolut/webhook` · event `ORDER_COMPLETED` |
+| **P0** | **Rotate exposed API keys** | Any key pasted in chat must be revoked in Revolut Business |
+| **P0** | **End-to-end payment smoke test** | Log in as non-premium → `/premium` → Revolut checkout → `/premium/success` → premium active |
+| **P1** | **Revolut merchant verification** | Resubmit with live URL; static product description in `index.html` + Contact page |
+| **P1** | **Align checkout amount with pricing** | One `REVOLUT_PREMIUM_AMOUNT` today — set to default server plan (e.g. Server App A$14/mo) or build multi-plan checkout |
+| **P1** | **Add guide banner PNGs** | `dashboard/public/banners/` — see README there |
+| **P1** | Finish **launch checklist** | [LAUNCH_CHECKLIST.md](./LAUNCH_CHECKLIST.md) — add Revolut section |
+| **P2** | Custom domain (optional) | `underbosshq.com` — helps merchant trust; update `FRONTEND_URL`, OAuth redirect, Vercel |
+| **P2** | Multi-guild operator view | Dashboard list of guilds the bot is in |
+| **P2** | ESLint cleanup | 33 non-blocking issues in dashboard |
+| **P2** | Post-launch alerting | Render/email/Slack on failed health checks |
+| **P2** | Remove unused `@revolut/checkout` from parent `package.json` | Or implement embedded checkout later |
 
 ### Phase 3 — Monetization & growth
 
-- [ ] Stripe / billing hardened as default path (not just “wired”)
+- [ ] Per-plan Revolut checkout (Individual App/Bot/Bundle, Server App/Bot/Bundle)
+- [ ] Individual plan self-serve checkout (currently email support)
+- [ ] Annual billing option in Revolut
 - [ ] One-time purchases (digital packs, templates)
-- [ ] Faction (B2B) subscriptions
-- [x] **Premium vs basic bot command split** (gate advanced slash commands via guild premium)
+- [ ] Faction (B2B) subscriptions with invoicing
 - [ ] Creator marketplace / revenue share
 - [ ] Affiliate integrations
 - [ ] Merch store
 - [ ] API access (paid developer tier)
+- [ ] Live FX rates for price display (optional)
 
 ### Phase 4 — Scale & depth
 
@@ -137,14 +196,31 @@ UnderbossHQ is a **live faction ops platform**: Discord OAuth dashboard + Expres
 
 ---
 
-## Suggested sequence (clear direction)
+## Revolut production env (Render API service)
 
-1. **Ship dashboard `main`** — merge mobile nav + Help/manual; verify Vercel build (`VITE_API_URL`).
-2. **Money path** — Stripe webhook + complimentary/admin premium flows smoke-tested in production.
-3. **Ops clarity** — guilds-added-to-bot view; finish launch-checklist greenticks.
-4. **Premium bot** — define basic vs premium command sets and enforce on the bot + dashboard.
-5. **Only then** — marketplace, faction subscriptions, merch, paid API.
+| Variable | Example |
+|----------|---------|
+| `BILLING_PROVIDER` | `revolut` |
+| `DASHBOARD_REQUIRES_PREMIUM` | `true` |
+| `REVOLUT_MERCHANT_SECRET_KEY` | Live key from Revolut Business → Merchant → API |
+| `REVOLUT_PREMIUM_AMOUNT` | `1400` (= A$14.00 in cents) |
+| `REVOLUT_PREMIUM_CURRENCY` | `AUD` |
+| `REVOLUT_PREMIUM_PERIOD_DAYS` | `30` |
+| `REVOLUT_WEBHOOK_SIGNING_SECRET` | From webhook setup |
+| `REVOLUT_SANDBOX` | omit or `false` for live |
+
+**Do not** paste secrets in chat or commit `.env` files.
 
 ---
 
-*Last consolidated: July 2026*
+## Suggested sequence
+
+1. **Deploy backend fix** + confirm `/api/auth/me` returns `billingCheckout` when Revolut env is set.
+2. **Configure Revolut on Render** + webhook → smoke-test checkout in production.
+3. **Revolut merchant resubmission** — live public site, pricing, contact, product description.
+4. **Banner assets** + launch checklist greenticks.
+5. **Multi-plan checkout** — then individual self-serve, marketplace, merch.
+
+---
+
+*Last consolidated: 28 July 2026*

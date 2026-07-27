@@ -33,3 +33,7 @@ Thumbs.db
 
 # Misc
 *.local
+
+# Secrets — never commit
+stripe_backup_code.txt
+*_backup_code.txt

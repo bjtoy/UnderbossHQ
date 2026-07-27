@@ -106,6 +106,39 @@ https://<backend-host>/api/auth/callback
 
 ---
 
+## 5b. Revolut billing (default paywall)
+
+Set on the **backend** Render service (live Merchant keys — not sandbox):
+
+| Variable | Example |
+|----------|---------|
+| `BILLING_PROVIDER` | `revolut` |
+| `DASHBOARD_REQUIRES_PREMIUM` | `true` |
+| `REVOLUT_MERCHANT_SECRET_KEY` | From Revolut Business → Merchant → API |
+| `REVOLUT_PREMIUM_AMOUNT` | Minor units (e.g. `1400` = A$14.00) |
+| `REVOLUT_PREMIUM_CURRENCY` | `AUD` |
+| `REVOLUT_PREMIUM_PERIOD_DAYS` | `30` |
+| `REVOLUT_WEBHOOK_SIGNING_SECRET` | From webhook registration |
+| `REVOLUT_SANDBOX` | omit or `false` for production |
+
+**Webhook URL** (live Merchant API):
+
+```
+https://<backend-host>/api/revolut/webhook
+```
+
+Event: `ORDER_COMPLETED`
+
+**Verify:**
+
+- [ ] `GET /api/auth/me` (authenticated) returns `billingConfigured: true` and `billingCheckout`
+- [ ] Non-premium user sees Subscribe in sidebar and checkout on `/premium`
+- [ ] Test payment → redirect to `/premium/success` → premium activates (webhook or confirm)
+
+Stripe (`BILLING_PROVIDER=stripe`) remains supported as legacy; Revolut is the default.
+
+---
+
 ## 6. Domain + SSL
 
 Render provides free SSL for `*.onrender.com` automatically.
