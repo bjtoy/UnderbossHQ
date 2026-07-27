@@ -1,6 +1,6 @@
-# UnderbossHQ
+﻿# UnderbossHQ
 
-Parent repository for the **UnderbossHQ** platform — Discord OAuth dashboard, Express API, and bot integration.
+Parent repository for the **UnderbossHQ** platform â€” Discord OAuth dashboard, Express API, and bot integration.
 
 **New here?** Read the [User Manual](./USER_MANUAL.md) or download [UnderbossHQ-User-Manual.docx](./UnderbossHQ-User-Manual.docx) for login, roles, and day-to-day dashboard use.
 
@@ -16,6 +16,10 @@ This repo holds **planning docs**, **docker-compose**, and workspace config. App
 | **Backend API** | [UnderbossHQ-backend](https://github.com/bjtoy/UnderbossHQ-backend) | [underbosshq-backend.onrender.com](https://underbosshq-api-hp8b.onrender.com) |
 | **Dashboard (React)** | [UnderbossHQ-dashboard](https://github.com/bjtoy/UnderbossHQ-dashboard) | [underbosshq-two.vercel.app](https://underbosshq-two.vercel.app) |
 
+
+## Local workspace (recommended)
+
+Open the parent repo from **L:\UnderbossHQ** on the APP Development drive (L:). Confidential staff briefing and financial materials are kept separately at **L:\UBHQ-admin** (sibling folder — not part of the deployed app). See [docs/internal/README.md](./docs/internal/README.md) for the redirect and L:\UBHQ-admin\README.md for regeneration commands.
 ## Local development
 
 ### Prerequisites
@@ -39,7 +43,7 @@ git clone https://github.com/bjtoy/UnderbossHQ-dashboard.git dashboard
 ```bash
 cd backend
 cp .env.example .env
-# Edit .env — see below
+# Edit .env â€” see below
 npm install
 npm run dev
 ```
@@ -60,7 +64,7 @@ Runs on **http://localhost:5173**
 
 ### 4. Discord OAuth redirect URIs
 
-Add these in the [Discord Developer Portal](https://discord.com/developers/applications) → OAuth2 → Redirects:
+Add these in the [Discord Developer Portal](https://discord.com/developers/applications) â†’ OAuth2 â†’ Redirects:
 
 - Local: `http://localhost:3000/api/auth/callback`
 - Production: your backend callback URL (not the dashboard URL)
@@ -94,7 +98,7 @@ See [render.yaml](./render.yaml) for the Render blueprint and **[LAUNCH_CHECKLIS
 Quick production checklist:
 
 1. Push latest `backend` and `dashboard` to GitHub
-2. Render: backend `startCommand` → `npm run start:deploy`, health check `/api/health`
+2. Render: backend `startCommand` â†’ `npm run start:deploy`, health check `/api/health`
 3. Render: dashboard build env `VITE_API_URL=https://<backend-host>`
 4. Set all backend secrets (see LAUNCH_CHECKLIST.md)
 5. Discord OAuth redirect: `https://<backend-host>/api/auth/callback`
@@ -136,16 +140,16 @@ Ensure `backend/.env` exists before running compose.
 ## Project layout
 
 ```
-UnderbossHQ/                  ← parent repo (open this folder in Cursor)
-├── README.md
-├── USER_MANUAL.md            ← end-user guide (members, mods, admins)
-├── LAUNCH_CHECKLIST.md       ← Section L deploy checklist
-├── DEPLOYMENT_GUIDE.md
-├── docker-compose.yml
-├── render.yaml
-├── scripts/monitor-health.js
-├── backend/                  ← separate git repo (API + bot)
-└── dashboard/                ← separate git repo (React UI)
+UnderbossHQ/                  â† parent repo (open this folder in Cursor)
+â”œâ”€â”€ README.md
+â”œâ”€â”€ USER_MANUAL.md            â† end-user guide (members, mods, admins)
+â”œâ”€â”€ LAUNCH_CHECKLIST.md       â† Section L deploy checklist
+â”œâ”€â”€ DEPLOYMENT_GUIDE.md
+â”œâ”€â”€ docker-compose.yml
+â”œâ”€â”€ render.yaml
+â”œâ”€â”€ scripts/monitor-health.js
+â”œâ”€â”€ backend/                  â† separate git repo (API + bot)
+â””â”€â”€ dashboard/                â† separate git repo (React UI)
 ```
 
 `docker-compose.yml` and `backend.code-workspace` expect the subfolders to be named **`backend`** and **`dashboard`**. If you renamed them locally, either rename back to match or update those config files.
@@ -157,3 +161,4 @@ Never commit `.env` files. They are gitignored in all repos.
 ## Roadmap status
 
 See [ROADMAP.md](./ROADMAP.md) for complete vs remaining work.
+
